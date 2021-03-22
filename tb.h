@@ -12,45 +12,45 @@ template  <class TKey, class TVal>
 class TTable
 {
 protected:
-	int DataCount; // количество записей в таблице
-	int Efficiency; // показатель эффективности выполнения операции
+	int DataCount; // ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г§Г ГЇГЁГ±ГҐГ© Гў ГІГ ГЎГ«ГЁГ¶ГҐ
+	int Efficiency; // ГЇГ®ГЄГ Г§Г ГІГҐГ«Гј ГЅГґГґГҐГЄГІГЁГўГ­Г®Г±ГІГЁ ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї Г®ГЇГҐГ°Г Г¶ГЁГЁ
 public:
-	TTable() { DataCount = 0; Efficiency = 0; } // конструктор
-	virtual ~TTable() {}; // деструктор
-	 // информационные методы
-	int GetDataCount() const { return DataCount; } // к-во записей
-	int GetEfficiency() const { return Efficiency; } // эффективность
-	int IsEmpty() const { return DataCount == 0; } //пуста?
-	virtual int IsFull() const = 0; // заполнена?
-	// доступ
+	TTable() { DataCount = 0; Efficiency = 0; } // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
+	virtual ~TTable() {}; // Г¤ГҐГ±ГІГ°ГіГЄГІГ®Г°
+	 // ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГ®Г­Г­Г»ГҐ Г¬ГҐГІГ®Г¤Г»
+	int GetDataCount() const { return DataCount; } // ГЄ-ГўГ® Г§Г ГЇГЁГ±ГҐГ©
+	int GetEfficiency() const { return Efficiency; } // ГЅГґГґГҐГЄГІГЁГўГ­Г®Г±ГІГј
+	int IsEmpty() const { return DataCount == 0; } //ГЇГіГ±ГІГ ?
+	virtual int IsFull() const = 0; // Г§Г ГЇГ®Г«Г­ГҐГ­Г ?
+	// Г¤Г®Г±ГІГіГЇ
 	virtual TKey GetKey(void) const = 0;
 	virtual TVal GetValuePTR(void) const = 0;
-	// основные методы
-	virtual TVal FindRecord(TKey k) = 0; // найти запись
-	virtual void InsRecord(TKey k, TVal pVal) = 0; // вставить
-	virtual void DelRecord(TKey k) = 0; // удалить запись
-	// навигация
-	virtual int Reset(void) = 0; // установить на первую запись
-	virtual int IsTabEnded(void) const = 0; // таблица завершена?
-	virtual int GoNext(void) = 0; // переход к следующей записи
-	// (=1 после применения для последней записи таблицы)
+	// Г®Г±Г­Г®ГўГ­Г»ГҐ Г¬ГҐГІГ®Г¤Г»
+	virtual TVal FindRecord(TKey k) = 0; // Г­Г Г©ГІГЁ Г§Г ГЇГЁГ±Гј
+	virtual void InsRecord(TKey k, TVal pVal) = 0; // ГўГ±ГІГ ГўГЁГІГј
+	virtual void DelRecord(TKey k) = 0; // ГіГ¤Г Г«ГЁГІГј Г§Г ГЇГЁГ±Гј
+	// Г­Г ГўГЁГЈГ Г¶ГЁГї
+	virtual int Reset(void) = 0; // ГіГ±ГІГ Г­Г®ГўГЁГІГј Г­Г  ГЇГҐГ°ГўГіГѕ Г§Г ГЇГЁГ±Гј
+	virtual int IsTabEnded(void) const = 0; // ГІГ ГЎГ«ГЁГ¶Г  Г§Г ГўГҐГ°ГёГҐГ­Г ?
+	virtual int GoNext(void) = 0; // ГЇГҐГ°ГҐГµГ®Г¤ ГЄ Г±Г«ГҐГ¤ГіГѕГ№ГҐГ© Г§Г ГЇГЁГ±ГЁ
+	// (=1 ГЇГ®Г±Г«ГҐ ГЇГ°ГЁГ¬ГҐГ­ГҐГ­ГЁГї Г¤Г«Гї ГЇГ®Г±Г«ГҐГ¤Г­ГҐГ© Г§Г ГЇГЁГ±ГЁ ГІГ ГЎГ«ГЁГ¶Г»)
 };
 
 //1
 template <class TKey, class TVal>
 class Record : public TTable<TKey, TVal>
 {
-protected: // поля
-	TKey Key; // ключ записи
+protected: // ГЇГ®Г«Гї
+	TKey Key; // ГЄГ«ГѕГ· Г§Г ГЇГЁГ±ГЁ
 	TVal Value;
-public: // методы
+public: // Г¬ГҐГІГ®Г¤Г»
 	Record(TKey key, TVal value)
 	{
 		Key = key;
 		Value = value;
-	};// конструктор
+	};// ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
 	~Record() {};
-	// установить значение ключа
+	// ГіГ±ГІГ Г­Г®ГўГЁГІГј Г§Г­Г Г·ГҐГ­ГЁГҐ ГЄГ«ГѕГ·Г 
 	void SetRec(TKey k, TVal v)
 	{
 		cout << "\nName: ";
@@ -58,12 +58,12 @@ public: // методы
 		cout << "\nMark: ";
 		cin >> k;
 	}
-	TKey GetKey(void); // получить значение ключа
-	Record& operator = (Record& tr);// присваивание
-	virtual int operator == (const Record& tr); // сравнение =
-	virtual int operator < (const Record& tr); // сравнение «<»
-	virtual int operator > (const Record& tr); // сравнение «>»
-   //дружественные классы для различных типов таблиц, см. далее
+	TKey GetKey(void); // ГЇГ®Г«ГіГ·ГЁГІГј Г§Г­Г Г·ГҐГ­ГЁГҐ ГЄГ«ГѕГ·Г 
+	Record& operator = (Record& tr);// ГЇГ°ГЁГ±ГўГ ГЁГўГ Г­ГЁГҐ
+	virtual int operator == (const Record& tr); // Г±Г°Г ГўГ­ГҐГ­ГЁГҐ =
+	virtual int operator < (const Record& tr); // Г±Г°Г ГўГ­ГҐГ­ГЁГҐ В«<В»
+	virtual int operator > (const Record& tr); // Г±Г°Г ГўГ­ГҐГ­ГЁГҐ В«>В»
+   //Г¤Г°ГіГ¦ГҐГ±ГІГўГҐГ­Г­Г»ГҐ ГЄГ«Г Г±Г±Г» Г¤Г«Гї Г°Г Г§Г«ГЁГ·Г­Г»Гµ ГІГЁГЇГ®Гў ГІГ ГЎГ«ГЁГ¶, Г±Г¬. Г¤Г Г«ГҐГҐ
 	friend class scanTable;
 	friend class sortTable;
 	friend class TTreeNode;
@@ -77,9 +77,10 @@ template  <class TKey, class TVal>
 class TArrayTable : public TTable<TKey, TVal>
 {
 protected:
-	std::vector<Record<TKey, TVal>> pRecs; // память для записей таблицы
-	int TabSize; // макс. возм.количество записей в таблице
-	int CurrPos; // номер текущей записи (нумерация с 0)
+	std::vector<Record<TKey, TVal>> pRecs; // ГЇГ Г¬ГїГІГј Г¤Г«Гї Г§Г ГЇГЁГ±ГҐГ© ГІГ ГЎГ«ГЁГ¶Г»
+	int TabSize; // Г¬Г ГЄГ±. ГўГ®Г§Г¬.ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г§Г ГЇГЁГ±ГҐГ© Гў ГІГ ГЎГ«ГЁГ¶ГҐ
+	int CurrPos; // Г­Г®Г¬ГҐГ° ГІГҐГЄГіГ№ГҐГ© Г§Г ГЇГЁГ±ГЁ (Г­ГіГ¬ГҐГ°Г Г¶ГЁГї Г± 0)
+	Record<TKey, TVal> rec;
 public:
 	TArrayTable(int Size = 25) : TTable(0, 0)
 	{
@@ -90,21 +91,21 @@ public:
 	~TArrayTable()
 	{
 		delete[] pRecs;
-	};
-	// информационные методы
+	}
+	// ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГ®Г­Г­Г»ГҐ Г¬ГҐГІГ®Г¤Г»
 	virtual int IsFull() const;
-	// к-во записей
+	// ГЄ-ГўГ® Г§Г ГЇГЁГ±ГҐГ©
 	int GetTabSize() const
 	{
 		return pRecs.size();
 	}; 
-	// доступ
+	// Г¤Г®Г±ГІГіГЇ
 	virtual TKey GetKey(void) const
 	{
 
 	};
-	// основные методы
-	// найти запись
+	// Г®Г±Г­Г®ГўГ­Г»ГҐ Г¬ГҐГІГ®Г¤Г»
+	// Г­Г Г©ГІГЁ Г§Г ГЇГЁГ±Гј
 	virtual TVal FindRecord(TKey k)
 	{
 		std::string input;
@@ -113,32 +114,33 @@ public:
 		for (std::string find : pRecs)
 			if (input == find) cout << find << "\n";
 	}
-	// вставить
+	// ГўГ±ГІГ ГўГЁГІГј
 	virtual void InsRecord(TKey k, TVal pVal)
 	{
 		int pos;
 		cout << "In which position need to insert new record?: ";
 		cin >> pos;
+		rec.SetRec();
 	}
-	// удалить запись
+	// ГіГ¤Г Г«ГЁГІГј Г§Г ГЇГЁГ±Гј
 	virtual void DelRecord(TKey k)
 	{
 
 	}
-	// навигация
-	// установить на первую запись
+	// Г­Г ГўГЁГЈГ Г¶ГЁГї
+	// ГіГ±ГІГ Г­Г®ГўГЁГІГј Г­Г  ГЇГҐГ°ГўГіГѕ Г§Г ГЇГЁГ±Гј
 	virtual int Reset(void)
 	{
 		CurrPos = 0;
 	}
-	// таблица завершена?
+	// ГІГ ГЎГ«ГЁГ¶Г  Г§Г ГўГҐГ°ГёГҐГ­Г ?
 	virtual int IsTabEnded(void) const; 
-	// переход к следующей записи
+	// ГЇГҐГ°ГҐГµГ®Г¤ ГЄ Г±Г«ГҐГ¤ГіГѕГ№ГҐГ© Г§Г ГЇГЁГ±ГЁ
 	virtual int GoNext(void); 
-	//(=1 после применения для последней записи таблицы)
-	// установить текущую запись
+	//(=1 ГЇГ®Г±Г«ГҐ ГЇГ°ГЁГ¬ГҐГ­ГҐГ­ГЁГї Г¤Г«Гї ГЇГ®Г±Г«ГҐГ¤Г­ГҐГ© Г§Г ГЇГЁГ±ГЁ ГІГ ГЎГ«ГЁГ¶Г»)
+	// ГіГ±ГІГ Г­Г®ГўГЁГІГј ГІГҐГЄГіГ№ГіГѕ Г§Г ГЇГЁГ±Гј
 	virtual int SetCurrentPos(int pos);
-	//получить номер текущей записи
+	//ГЇГ®Г«ГіГ·ГЁГІГј Г­Г®Г¬ГҐГ° ГІГҐГЄГіГ№ГҐГ© Г§Г ГЇГЁГ±ГЁ
 	int GetCurrentPos(void) const
 	{
 		return CurrPos;
