@@ -21,10 +21,10 @@ public:
 	int GetDataCount() const { return DataCount; } // ê-âî çàïèñåé
 	int GetEfficiency() const { return Efficiency; } // ýôôåêòèâíîñòü
 	int IsEmpty() const { return DataCount == 0; } //ïóñòà?
-	virtual int IsFull() const = 0; // çàïîëíåíà?
+	//virtual int IsFull() const = 0; // çàïîëíåíà?
 	// äîñòóï
-	virtual TKey GetKey(void) const = 0;
-	virtual TVal GetValuePTR(void) const = 0;
+	TKey GetKey(void);
+	//virtual TVal GetValuePTR(void) const = 0;
 	// îñíîâíûå ìåòîäû
 	virtual TVal FindRecord(TKey k) = 0; // íàéòè çàïèñü
 	virtual void InsRecord(TKey k, TVal pVal) = 0; // âñòàâèòü
@@ -48,7 +48,7 @@ public: // ìåòîäû
 	{
 		Key = key;
 		Value = value;
-	};// êîíñòðóêòîð
+	}// êîíñòðóêòîð
 	~Record() {};
 	// óñòàíîâèòü çíà÷åíèå êëþ÷à
 	void SetRec(TKey k, TVal v)
@@ -58,11 +58,21 @@ public: // ìåòîäû
 		cout << "\nMark: ";
 		cin >> k;
 	}
-	TKey GetKey(void); // ïîëó÷èòü çíà÷åíèå êëþ÷à
+	TKey GetKey(void)
+	{
+		return 0;
+	} // ïîëó÷èòü çíà÷åíèå êëþ÷à
 	Record& operator = (Record& tr);// ïðèñâàèâàíèå
-	virtual int operator == (const Record& tr); // ñðàâíåíèå =
-	virtual int operator < (const Record& tr); // ñðàâíåíèå «<»
-	virtual int operator > (const Record& tr); // ñðàâíåíèå «>»
+	virtual int operator == (const Record& tr) { return 0; } // ñðàâíåíèå =
+	virtual int operator < (const Record& tr) { return 0; } // ñðàâíåíèå «<»
+	virtual int operator > (const Record& tr) { return 0; } // ñðàâíåíèå «>»
+	virtual TVal FindRecord(TKey k) { return 0; } // íàéòè çàïèñü
+	virtual void InsRecord(TKey k, TVal pVal) {} // âñòàâèòü
+	virtual void DelRecord(TKey k) {} // óäàëèòü çàïèñü
+	// íàâèãàöèÿ
+	virtual int Reset(void) { return 0; } // óñòàíîâèòü íà ïåðâóþ çàïèñü
+	virtual int IsTabEnded(void) const { return 0; } // òàáëèöà çàâåðøåíà?
+	virtual int GoNext(void) { return 0; } // ïåðåõîä ê ñëåäóþùåé çàïèñè
    //äðóæåñòâåííûå êëàññû äëÿ ðàçëè÷íûõ òèïîâ òàáëèö, ñì. äàëåå
 	friend class scanTable;
 	friend class sortTable;
@@ -82,7 +92,7 @@ protected:
 	int CurrPos; // íîìåð òåêóùåé çàïèñè (íóìåðàöèÿ ñ 0)
 	Record<TKey, TVal> rec;
 public:
-	TArrayTable(int Size = 25) : TTable(0, 0)
+	TArrayTable(int Size = 25) : TTable()
 	{
 		TabSize = Size;
 		CurrPos = 0;
@@ -90,29 +100,28 @@ public:
 	}
 	~TArrayTable()
 	{
-		delete[] pRecs;
+		pRecs.clear();
 	}
 	// èíôîðìàöèîííûå ìåòîäû
-	virtual int IsFull() const;
+	//virtual int IsFull() const;
 	// ê-âî çàïèñåé
 	int GetTabSize() const
 	{
 		return pRecs.size();
-	}; 
+	}
 	// äîñòóï
 	virtual TKey GetKey(void) const
 	{
-
-	};
+		return 0;
+	}
 	// îñíîâíûå ìåòîäû
 	// íàéòè çàïèñü
 	virtual TVal FindRecord(TKey k)
 	{
-		std::string input;
+		int input;
 		cout << "Input number of record for search: ";
 		cin >> input;
-		for (std::string find : pRecs)
-			if (input == find) cout << find << "\n";
+		return 0;
 	}
 	// âñòàâèòü
 	virtual void InsRecord(TKey k, TVal pVal)
@@ -120,7 +129,11 @@ public:
 		int pos;
 		cout << "In which position need to insert new record?: ";
 		cin >> pos;
-		rec.SetRec();
+		//rec.SetRec(k, pVal);
+	}
+	void print()
+	{
+		for (Record<TKey, TVal> val : pRecs) cout << val << "\n";
 	}
 	// óäàëèòü çàïèñü
 	virtual void DelRecord(TKey k)
@@ -132,14 +145,15 @@ public:
 	virtual int Reset(void)
 	{
 		CurrPos = 0;
+		return 0;
 	}
 	// òàáëèöà çàâåðøåíà?
-	virtual int IsTabEnded(void) const; 
+	virtual int IsTabEnded(void) const { return 0; }
 	// ïåðåõîä ê ñëåäóþùåé çàïèñè
-	virtual int GoNext(void); 
+	virtual int GoNext(void) { return 0; }
 	//(=1 ïîñëå ïðèìåíåíèÿ äëÿ ïîñëåäíåé çàïèñè òàáëèöû)
 	// óñòàíîâèòü òåêóùóþ çàïèñü
-	virtual int SetCurrentPos(int pos);
+	virtual int SetCurrentPos(int pos) { return 0; }
 	//ïîëó÷èòü íîìåð òåêóùåé çàïèñè
 	int GetCurrentPos(void) const
 	{
