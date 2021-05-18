@@ -1,6 +1,4 @@
-//#include "Table.h"
-//#include "ArrayTable.h"
-#include <iostream>
+ï»¿#include <iostream>
 #include <fstream>
 #include <list>
 #include <vector>
@@ -136,30 +134,30 @@ public:
 		k += " ";
 		int i = 7;
 		for (i = 0; i < pRecs.size(); ++i)
-			if (pRecs[i].first == k) 
+			if (pRecs[i].first == k)
 			{
-				std::cout << "Íàéäåíà çàïèñü: " << pRecs[i].first << " ";
+				std::cout << "ÃÃ Ã©Ã¤Ã¥Ã­Ã  Ã§Ã Ã¯Ã¨Ã±Ã¼: " << pRecs[i].first << " ";
 				for (int n(0); n < pRecs[i].second.size(); ++n)
 				{
 					std::cout << pRecs[i].second[n] << " ";
 				}
-				std::cout << " ïîä íîìåðîì " << i << "\n";
+				std::cout << " Ã¯Ã®Ã¤ Ã­Ã®Ã¬Ã¥Ã°Ã®Ã¬ " << i << "\n";
 				break;
 			}
 		return i;
-				/*int i;
-		SetRecCode(TabOK);
-		for (i = 0; i < pRecs.size(); ++i)
-			if (pRecs[i].first == k)
-				break;
-		efficienty = i + 1;
-		if (i < DataCount)
-		{
-			CurrPos = i;
-			return pRecs[i].second;
-		}
-		SetRecCode(TabNoRec);*/
-		//return NULL;
+		/*int i;
+SetRecCode(TabOK);
+for (i = 0; i < pRecs.size(); ++i)
+	if (pRecs[i].first == k)
+		break;
+efficienty = i + 1;
+if (i < DataCount)
+{
+	CurrPos = i;
+	return pRecs[i].second;
+}
+SetRecCode(TabNoRec);*/
+//return NULL;
 	}
 
 	virtual TKey GetKey(DataPos mode) const
@@ -230,14 +228,14 @@ public:
 
 		if (temp == 7)
 		{
-			std::cout << "Çàïèñè íå ñóùåñòâóåò";
+			std::cout << "Ã‡Ã Ã¯Ã¨Ã±Ã¨ Ã­Ã¥ Ã±Ã³Ã¹Ã¥Ã±Ã²Ã¢Ã³Ã¥Ã²";
 			SetRecCode(TabNoRec);
 		}
 		else
 		{
 			SetRecCode(TabOK);
 			pRecs.erase(pRecs.begin() + temp);
-			std::cout << "Çàïèñü ïîä íîìåðîì " << temp << " óäàëåíà\n";
+			std::cout << "Ã‡Ã Ã¯Ã¨Ã±Ã¼ Ã¯Ã®Ã¤ Ã­Ã®Ã¬Ã¥Ã°Ã®Ã¬ " << temp << " Ã³Ã¤Ã Ã«Ã¥Ã­Ã \n";
 		}
 	}
 
@@ -365,7 +363,7 @@ public:
 				Temp[k].assign(pRecs[h].first);
 				k++;
 			}
-		std::cout << "\nÂûâîä: ";
+		std::cout << "\nÃ‚Ã»Ã¢Ã®Ã¤: ";
 		for (int i = 0; i <= Temp[i].size(); i++)
 		{
 			std::cout << Temp[i] << "\n";
@@ -384,10 +382,10 @@ public:
 		j = right;
 		//char tmp[100];
 
-		while (i != j) 
+		while (i != j)
 		{
 			if ((strcmp(pRecs[i].first.c_str(), pRecs[j].first.c_str()) > 0) != (i < j))
-			//if ( i <= j)
+				//if ( i <= j)
 			{
 				std::cout << i << " " << j << "\n";
 				swap(pRecs[i], pRecs[j]);
@@ -427,7 +425,7 @@ public:
 };
 
 template <class TKey, class TVal>
-class HashTable 
+class HashTable
 {
 	std::vector<std::list<std::pair<TKey, TVal>>> pRecs;
 	int size;
@@ -457,21 +455,21 @@ public:
 		int cnt = 0;
 		for (std::list<std::pair<TKey, TVal>> l : pRecs)
 		{
-			pos = HashIntKey(k)-1;
+			pos = HashIntKey(k) - 1;
 			for (std::pair<TKey, TVal> p : l)
 			{
 				if (p.first == " ") std::cout << "hi ";
 				if (p.first == k)
 				{
-					if(cnt!=0)m++;
-					std::cout << "Íàéäåíà çàïèñü: " << p.first;
+					if (cnt != 0)m++;
+					std::cout << "ÃÃ Ã©Ã¤Ã¥Ã­Ã  Ã§Ã Ã¯Ã¨Ã±Ã¼: " << p.first;
 					for (int j : p.second) std::cout << j << " ";
-					std::cout << " â ñïèñêå íîìåð " << pos << "\n";
+					std::cout << " Ã¢ Ã±Ã¯Ã¨Ã±ÃªÃ¥ Ã­Ã®Ã¬Ã¥Ã° " << pos << "\n";
 					continue;
 				}
 				cnt++;
 			}
-			if(!(l.empty())) i++;
+			if (!(l.empty())) i++;
 		}
 		return pos;
 	}
@@ -482,7 +480,7 @@ public:
 		int pos = HashIntKey(k) - 1;
 		std::cout << pos << "\n";
 		pRecs.reserve(pos);
-		for(int i(0); i <= pos; ++i)
+		for (int i(0); i <= pos; ++i)
 			pRecs.push_back(li);
 		pRecs[pos].push_back(insPair);
 	}
@@ -491,7 +489,7 @@ public:
 		int pos = FindRecord(k);
 		if (pos == 7)
 		{
-			std::cout << "Çàïèñè íå ñóùåñòâóåò";
+			std::cout << "Ã‡Ã Ã¯Ã¨Ã±Ã¨ Ã­Ã¥ Ã±Ã³Ã¹Ã¥Ã±Ã²Ã¢Ã³Ã¥Ã²";
 		}
 		else
 		{
@@ -506,7 +504,7 @@ public:
 					pRecs[i].erase(it2);
 				}
 			}
-			std::cout << "Çàïèñü â ñïèñêå íîìåð " << pos << " óäàëåíà\n";
+			std::cout << "Ã‡Ã Ã¯Ã¨Ã±Ã¼ Ã¢ Ã±Ã¯Ã¨Ã±ÃªÃ¥ Ã­Ã®Ã¬Ã¥Ã° " << pos << " Ã³Ã¤Ã Ã«Ã¥Ã­Ã \n";
 		}
 	}
 	virtual void print(void)
@@ -526,170 +524,161 @@ public:
 };
 
 template <class TKey, class TVal>
-class TreeTable
+class node
 {
-
-};
-
-class node {
 public:
 	node* left;
 	node* right;
-	int data;
+	TKey key;
+	TVal val;
 };
 
-node* root = NULL;// initilize empty tree
+template <class TKey, class TVal>
+class TreeTable : public node<TKey, TVal>
+{
+public:
+	node<TKey, TVal>* root = NULL;
 
-node* getNewnode(int newdata) {
-
-	node* newNode = new node;
-	newNode->data = newdata;
-	newNode->left = NULL;
-	newNode->right = NULL;
-
-	return newNode;
-
-}
-
-void print(node* curr) {
-
-	if (curr != NULL) {
-		print(curr->left);
-		std::cout << curr->data << " ";
-		print(curr->right);
-
+	node<TKey, TVal>* getNewnode(TKey key, TVal val)
+	{
+		node<TKey, TVal>* newNode = new node<TKey, TVal>;
+		newNode->key = key;
+		newNode->val = val;
+		newNode->left = NULL;
+		newNode->right = NULL;
+		return newNode;
 	}
 
-	return;
-}
+	void print(node<TKey, TVal>* curr)
+	{
 
-bool search(node* curr, int data) {
-	std::cout << " search: " << data;
-	if (curr == NULL) return false;
-	//else if (data <= curr->data) return search(curr->left, data);
-	//else if (data > curr->data) return search(curr->right, data);
-	else if (curr->data == data) return true;
-
-}
-
-node* insertNode(node* curr, int newdata) {
-
-	if (curr == NULL) {
-		curr = getNewnode(newdata);
-	}
-	else if (newdata <= curr->data) {
-		curr->left = (insertNode(curr->left, newdata));
-	}
-	else if (newdata > curr->data) {
-		curr->right = (insertNode(curr->right, newdata));
-	}
-	return curr;
-
-}
-
-//returns min of right sub-tree
-node* findmin(node* curr) {
-
-	while (curr->left != NULL) curr = curr->left;
-
-	return curr;
-}
-
-
-//returns max of right sub-tree
-node* findmax(node* curr) {
-
-	while (curr->right != NULL) curr = curr->right;
-
-	return curr;
-}
-
-node* deleteNode(node* curr, int data) {
-
-	if (curr == NULL) return curr;
-	else if (data < curr->data) curr->left = deleteNode(curr->left, data);
-	else if (data > curr->data) curr->right = deleteNode(curr->right, data);
-	else {
-		//case 1  both childs are NULL
-		if (curr->left == NULL && curr->right == NULL) {
-			delete curr;
-			curr = NULL;
-		}//case 2 only one child
-		else if (curr->left == NULL) {
-			node* temp = curr;
-			curr = curr->right;
-			delete temp;
+		if (curr != NULL) {
+			print(curr->left);
+			std::cout << curr->key << " ";
+			for (int i(0); i < 3; ++i) std::cout << curr->val[i] << " ";
+			print(curr->right);
 		}
-		else if (curr->right == NULL) {
-			node* temp = curr;
-			curr = curr->left;
-			delete temp;
-		}//case 3 node has both childs
-		else if (curr->left != NULL && curr->right != NULL) {
+		return;
+	}
 
-			node* temp = findmin(curr->right);
-			curr->data = temp->data;
-			curr->right = deleteNode(curr->right, temp->data);
+	bool FindRecord(node<TKey, TVal>* curr, TKey key)
+	{
+		if (curr == NULL) return false;
+		//else if (data <= curr->data) return search(curr->left, data);
+		//else if (data > curr->data) return search(curr->right, data);
+		else if (curr->key == key) { std::cout << "Found"; return true; }
+	}
 
+	node<TKey, TVal>* InsRecord(node<TKey, TVal>* curr, TKey key, TVal val)
+	{
+
+		if (curr == NULL) {
+			std::cout << "1";
+			curr = getNewnode(key, val);
 		}
-	}
+		else if (key <= curr->key) {
+			std::cout << "2";
 
-	return curr;
-}
+			curr->left = (InsRecord(curr->left, key, val));
+		}
+		else if (key > curr->key) {
+			std::cout << "3";
 
-void print_BFS(node* curr) {
-
-	std::cout << "Inside BFS" << std::endl;
-	//  print(curr);
-	std::cout << "\n" << std::endl;
-
-	if (curr == NULL) return;
-	std::queue<node*> discovered;
-	discovered.push(curr);
-
-	while (!discovered.empty()) {
-
-		node* temp = discovered.front();
-		discovered.pop();
-		if (temp != NULL) std::cout << temp->data << " " << std::endl;
-		if (temp->left != NULL) discovered.push(temp->left);
-		if (temp->right != NULL) discovered.push(temp->right);
-
-	}
-
-}
-
-node* common_ancestor(node* curr, int a, int b) {
-
-	if (curr->data < a && curr->data < b) {
-		curr = common_ancestor(curr->right, a, b);
-	}
-	else if (curr->data > a && curr->data > b) {
-		curr = common_ancestor(curr->left, a, b);
-	}
-	else
+			curr->right = (InsRecord(curr->right, key, val));
+		}
 		return curr;
-}
 
-bool IsBST(node* curr, int max, int min) {
+	}
 
-	if (curr == NULL) return true;
+	//returns min of right sub-tree
+	node<TKey, TVal>* findmin(node<TKey, TVal>* curr)
+	{
 
-	if (curr->data < max && curr->data > min
-		&& IsBST(curr->left, curr->data, min)
-		&& IsBST(curr->right, max, curr->data))
-		return true;
-	else return false;
-}
+		while (curr->left != NULL) curr = curr->left;
 
-bool BST_check(node* root) {
-	return IsBST(root, INT_MAX, INT_MIN);
-}
+		return curr;
+	}
 
 
-bool Is_balanced(node* curr) {
-	if (curr == NULL) return true;
-}
+	//returns max of right sub-tree
+	node<TKey, TVal>* findmax(node<TKey, TVal>* curr)
+	{
+
+		while (curr->right != NULL) curr = curr->right;
+
+		return curr;
+	}
+
+	node<TKey, TVal>* DelRecord(node<TKey, TVal>* curr, TKey data)
+	{
+
+		if (curr == NULL) return curr;
+		else if (data < curr->key) curr->left = DelRecord(curr->left, data);
+		else if (data > curr->key) curr->right = DelRecord(curr->right, data);
+		else {
+			//case 1  both childs are NULL
+			if (curr->left == NULL && curr->right == NULL) {
+				delete curr;
+				curr = NULL;
+			}//case 2 only one child
+			else if (curr->left == NULL) {
+				node<TKey, TVal>* temp = curr;
+				curr = curr->right;
+				delete temp;
+			}
+			else if (curr->right == NULL) {
+				node<TKey, TVal>* temp = curr;
+				curr = curr->left;
+				delete temp;
+			}//case 3 node has both childs
+			else if (curr->left != NULL && curr->right != NULL) {
+
+				node<TKey, TVal>* temp = findmin(curr->right);
+				curr->key = temp->key;
+				curr->right = DelRecord(curr->right, temp->key);
+
+			}
+		}
+		return curr;
+	}
+
+	void print_BFS(node<TKey, TVal>* curr)
+	{
+
+		std::cout << "Inside BFS" << std::endl;
+		//  print(curr);
+		std::cout << "\n" << std::endl;
+
+		if (curr == NULL) return;
+		std::queue<node*> discovered;
+		discovered.push(curr);
+
+		while (!discovered.empty()) {
+
+			node* temp = discovered.front();
+			discovered.pop();
+			if (temp != NULL) std::cout << temp->key << " " << std::endl;
+			if (temp->left != NULL) discovered.push(temp->left);
+			if (temp->right != NULL) discovered.push(temp->right);
+		}
+	}
+
+	node<TKey, TVal>* common_ancestor(node<TKey, TVal>* curr, int a, int b)
+	{
+		if (curr->data < a && curr->data < b) {
+			curr = common_ancestor(curr->right, a, b);
+		}
+		else if (curr->data > a && curr->data > b) {
+			curr = common_ancestor(curr->left, a, b);
+		}
+		else
+			return curr;
+	}
+	bool Is_balanced(node<TKey, TVal>* curr)
+	{
+		if (curr == NULL) return true;
+	}
+};
 
 
 
@@ -783,7 +772,6 @@ void ASimpleTable()
 	/*
 	for (std::string str : vec_key) std::cout << "key: " << str << " ";
 	std::cout << "\n";
-
 	for (std::vector<int> inn : vec_value)
 	{
 		for (int in : inn) std::cout << "v: " << in << " ";
@@ -833,7 +821,7 @@ void ASimpleTable()
 		}
 	}
 }
-void ASortTable() 
+void ASortTable()
 {
 	int choose, Size = 6;
 	int val;
@@ -932,7 +920,7 @@ void ASortTable()
 				break;
 			case 2:
 				sortMethod = MERGE_SORT;
-				pTab1->MergeSort( 0, 5);
+				pTab1->MergeSort(0, 5);
 				break;
 			case 3:
 				sortMethod = QUICK_SORT;
@@ -942,7 +930,7 @@ void ASortTable()
 				break;
 			}
 		}
-			break;
+		break;
 		case 6:
 			wh = 0;
 			break;
@@ -952,7 +940,7 @@ void ASortTable()
 	}
 
 }
-void AHashTable() 
+void AHashTable()
 {
 	int choose, Size = 6;
 	int val;
@@ -1047,70 +1035,101 @@ void AHashTable()
 		}
 	}
 }
-void ATreeTable() 
+void ATreeTable()
 {
-	root = insertNode(root, 15);
-	root = insertNode(root, 11);
-	root = insertNode(root, 18);
-	root = insertNode(root, 10);
-	root = insertNode(root, 16);
-	root = insertNode(root, 12);
-	root = insertNode(root, 17);
+	int choose, Size = 6;
+	int val;
+	std::vector<int>value;
+	bool wh = 1, check = 1;
+	std::string key;
+	int key_int[3];
+	std::vector<std::string>vec_key;
 
-	std::cout << "Inorder Tree" << std::endl;
-	print(root);
-	bool ch = search(root, 15);
-	std::cout << "\n" << ch;
+	std::vector<std::vector<int>>vec_value;
 
-	std::cout << "\nBFS" << std::endl;
-	print_BFS(root);
-	root = deleteNode(root,18);
+	TreeTable<std::string, std::vector<int>> pTab;
+	std::fstream file("table.txt", std::ios::in);
+	if (!file) std::cout << "File was not opened";
 
-	std::cout << "After deleting" << std::endl;
-	print(root);
+	for (int i = 0; i < Size; ++i)
+	{
+		std::vector<int> temp;
+		check = 1;
+		//file >> key;
+		std::getline(file, key);
+		//std::cout << key << "\n";
+		int im = 0;
+		for (char ch : key)
+		{
+			if ((int(ch)) >= 48 && (int(ch)) <= 57)
+			{
+				key_int[im] = ch - 48;
+				temp.push_back(key_int[im]);
+				im++;
+			}
+		}
+		vec_value.push_back(temp);
+		temp.clear();
+		int ik;
+		for (ik = 0; ik < key.size(); ++ik)
+		{
+			if (key[ik] == '|') break;
+		}
+		key.erase(ik, key.size());
+		//std::cout << "\n" << key << "\n";
+		vec_key.push_back(key);
+	}
 
-	std::cout << "\nBFS" << std::endl;
-	print_BFS(root);
-	std::cout << "in commin " << std::endl;
-	node* temp = common_ancestor(root, 17, 17);
-	std::cout << "common_ancestor is : " << temp->data << std::endl;
+	node<std::string, std::vector<int>>* root;
+	root = pTab.root;
 
-	if (BST_check(root)) std::cout << "YES IT Is BST" << std::endl;
-	else std::cout << "IT IS NOT BST" << std::endl;
+	int j(0);
+	for (int i(0); i < Size; ++i)
+	{
+		//pTab.InsRecord(root, vec_key[i], vec_value[j]);
+		root = pTab.InsRecord(root, vec_key[i], vec_value[j]);
+		j++;
+	}
+
+	while (wh)
+	{
+		std::cout << "\nWhat to do: \n1-Insert\n2-Find\n3-Delete\n4-Print\n5-Exit\n ";
+		std::cin >> choose;
+		switch (choose)
+		{
+		case 1:
+			value.clear();
+			std::cout << "Input key: ";
+			while (std::cin.get() != '\n');
+			std::getline(std::cin, key);
+			std::cout << "\nInput value: ";
+			for (int i(0); i < 3; ++i)
+			{
+				std::cin >> val;
+				value.push_back(val);
+			}
+			pTab.InsRecord(root, key, value);
+			break;
+		case 2:
+			std::cout << "Input key: ";
+			while (std::cin.get() != '\n');
+			std::getline(std::cin, key);
+			pTab.FindRecord(root, key);
+			break;
+		case 3:
+			std::cout << "Input key: ";
+			while (std::cin.get() != '\n');
+			std::getline(std::cin, key);
+			pTab.DelRecord(root, key);
+			break;
+		case 4:
+			pTab.print(root);
+			break;
+		case 5:
+			wh = 0;
+			break;
+		default:
+			break;
+		}
+	}
 }
-
-/*std::cout << l << " " << r << "\n";
-		char curr[30];
-		strcpy_s(curr, pRecs[l].first.c_str());
-		if (r == l)
-			return;
-		if (r - l == 1)
-		{
-			if (strcmp(pRecs[r].first.c_str() , curr) < 0)
-				pRecs[r] = pRecs[l];
-			return;
-		}
-		int m = (r + l) / 2;
-		std::cout << "\n1: ";
-		MergeSort(l, m);
-		std::cout << "\n2: ";
-		MergeSort(m + 1, r);
-		char buf[6][30];
-		int xl = l;
-		int xr = m + 1;
-		int cur = 0;
-		char currr[30];
-		strcpy_s(currr, pRecs[xr].first.c_str());
-
-		while (r - l + 1 != cur)
-		{
-			if (xl > m)
-				strcpy_s(buf[cur++], pRecs[xr++].first.c_str());
-			else if (xr > r)
-				strcpy_s(buf[cur++], pRecs[xl++].first.c_str());
-			else if (strcmp(pRecs[r].first.c_str(), currr) > 0)
-				strcpy_s(buf[cur++], pRecs[xr++].first.c_str());
-			else strcpy_s(buf[cur++], pRecs[xl++].first.c_str());
-		}
-		for (int i = 0; i < cur; i++)
-			pRecs[i + l].first = buf[i];*/
